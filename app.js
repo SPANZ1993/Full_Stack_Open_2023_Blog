@@ -3,9 +3,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 
-const {PORT} = require('./utils/config')
 
-const logger = require('./utils/logger')
 const middleware = require('./utils/middleware')
 
 
