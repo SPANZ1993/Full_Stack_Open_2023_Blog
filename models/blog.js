@@ -1,16 +1,16 @@
 const mongoose = require('mongoose')
 const {MONGODB_URI} = require('../utils/config')
+const logger = require('../utils/logger')
 
-// const mongoUrl = 'mongodb://localhost/bloglist'
 const mongoUrl = MONGODB_URI
 
 
 mongoose.connect(mongoUrl)
     .then(
-        () => {console.log('Connected to MongoDB')}
+        () => {logger.info('Connected to MongoDB')}
     )
     .catch(
-        error => {console.log('Error connecting to MongoDB:', error.message)}
+        error => {logger.info('Error connecting to MongoDB:', error.message)}
     )
 
 
@@ -19,10 +19,19 @@ mongoose.connect(mongoUrl)
 
 
 const blogSchema = new mongoose.Schema({
-    title: String,
+    title: {
+        type: String,
+        required: true
+    },
     author: String,
-    url: String,
-    likes: Number
+    url: {
+        type: String,
+        required: true
+    },
+    likes: {
+        type: Number, 
+        default: 0
+    }  
 })
 
 blogSchema.set('toJSON', {
